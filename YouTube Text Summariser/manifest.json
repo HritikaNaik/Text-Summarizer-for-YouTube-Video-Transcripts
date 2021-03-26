@@ -1,0 +1,27 @@
+{ 
+    "manifest_version": 2,
+    "name": "YSummarize",
+    "description": "An extension to provide summarized transcript of a YouTube Subtitle eligible Video.",
+    "version": "1.0",
+    "permissions": ["activeTab"],
+    "background": {
+     "scripts": ["background.js"],
+     "persistent": false
+    },
+    "content_scripts": [
+      {
+        "matches": ["http://www.youtube.com/watch?v=*"],
+        "js": ["contentScript.js"]
+      }
+    ],
+    "browser_action": {
+    "default_icon": {"128": "Images/data.png",
+    "48": "Images/data.png",
+    "32": "Images/data.png",
+    "16": "Images/data.png"},
+    "default_popup": "popup.html",
+    "default_title": "Enter youtube video URL to have its contents summarised",
+    "browser_style": true
+  }
+}
+
