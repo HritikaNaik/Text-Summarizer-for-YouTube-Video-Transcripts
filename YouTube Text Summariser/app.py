@@ -12,8 +12,6 @@ app = Flask(__name__)
 
 # define your resource endpoints
 app.route('/')
-
-
 def index_page():
     return "Hello world"
 
@@ -78,14 +76,15 @@ def get_id(**kwargs):
 
     transc, resp = transcript(video_id)
     sum = summary(transc)
-    return sum,resp 
+    
+    return jsonify({'status': resp, "responseText":sum})
 
 
 # server the app when this file is run
 if __name__ == '__main__':
 
     # using ProxyFisk because Flask is a development server, and this helps fix bugs in the server
-    app.wsgi_app = ProxyFix(app.wsgi_app)
+    #app.wsgi_app = ProxyFix(app.wsgi_app)
     app.run()
     #app.wsgi_app = ProxyFix(app.wsgi_app)
     # app.run()

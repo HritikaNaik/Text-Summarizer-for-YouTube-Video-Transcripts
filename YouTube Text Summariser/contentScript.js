@@ -1,8 +1,21 @@
-chrome.runtime.onMessage.addListener((message, callback) => {
+chrome.runtime.onMessage.addListener((message, function(){outputSummary(message)} ));
+function outputSummary(message){}
   if (message == "generate"){
-    chrome.scripting.executeScript({
-      file: 'app.py'
-    });
-  }
-});
+    chrome.tabs.query({currentWindow: true, active: true}, function(tabs){
+    console.log(tabs[0].url);
+    var link = tabs[0].url;
+    function callback() {
+    if (oReq.readyState === XMLHttpRequest.DONE) {
+        if (oReq.status === 200) {
+            result = oReq.responseText;
+            chrome.runtime.sendMessage({"message": "result", "data": result});
+        }
+    }
+};
 
+var oReq = new XMLHttpRequest();
+oReq.open("GET", link, true);
+oReq.onreadystatechange = callback;
+oReq.send();;
+});
+}
